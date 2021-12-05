@@ -16,7 +16,7 @@
             <!-- Register Form ect -->
             <div class="">
                 <div class="row flex-wrap m-0">
-                    <div class="col-xl-5 d-none d-xl-flex">
+                    <div class="col-xl-5 d-none d-xl-flex p-0">
                         <div class="container-fluid m-0 p-0 d-flex bg_image_register align-items-end" style="background: url( {{ asset('/res/images/icons/bgimage.jpg') }} ); background-size: auto 60rem;">
                             <b class="h1 mb-4 ms-5 text_light">
                                 Registrieren
@@ -73,7 +73,7 @@
                                         </p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-center mt-5 p-0 pt-4 col-xl-7 col-10">
-                                        <button id="submit_button" type="submit" class="account_create_button w-100">
+                                        <button id="submit_button" data-sitekey="3d13f6a1-9e2e-4d3e-a0ab-62fc334e2d98" data-callback="submitCaptcha" class="account_create_button w-100 h-captcha">
                                             <div class="row d-flex align-items-center">
                                                 <div class="col-xl-1 d-none d-xl-flex align-items-center justify-content-center">
                                                     <i class="material-icons text_light" id="submit_icon">person_add_alt_1</i>
@@ -145,4 +145,10 @@
     <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
     <script src="{{ asset('/scripts/quick_load_animations/button_load.js') }}"></script>
     <script src="{{ asset('/scripts/form_validation/authform.js') }}"></script>
+    <script>
+        function submitCaptcha(token)
+        {
+            document.getElementById('r_form').submit();
+        }
+    </script>
 @endsection

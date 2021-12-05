@@ -110,6 +110,7 @@
     border: none;
     color: var(--light);
     transition: 0.4s all ease-in-out;
+    width: 100%;
 }
 .register_input:hover, .register_input:active, .register_input:focus
 {
@@ -282,5 +283,5 @@
 
 .footer
 {
-    margin-top: 30vh !important;
+    margin-top: 100vh !important;
 }

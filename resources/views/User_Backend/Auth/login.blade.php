@@ -16,7 +16,7 @@
             <!-- Register Form ect -->
             <div class="">
                 <div class="row flex-wrap m-0">
-                    <div class="col-xl-5 d-none d-xl-flex">
+                    <div class="col-xl-5 d-none d-xl-flex p-0">
                         <div class="container-fluid m-0 p-0 d-flex bg_image_register align-items-end" style="background: url( {{ asset('/res/images/icons/loginbg.jpg') }} ); background-size: auto 80rem;">
                             <b class="h1 mb-4 ms-5 text_light">
                                 Einloggen
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="d-flex align-items-center justify-content-start mt-4 p-0 ms-1 col-xl-7 col-10">
                                         <div class="pretty p-default p-round p-pulse p-bigger">
-                                            <input name="accept" type="checkbox" checked />
+                                            <input name="remember" type="checkbox" checked />
                                             <div class="state p-success-o">
                                                 <label class="text_light"></label>
                                             </div>

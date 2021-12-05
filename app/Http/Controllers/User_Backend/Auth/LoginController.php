@@ -22,7 +22,7 @@ class LoginController extends Controller
     }
 
     //makes the login process
-    public function make_login_user() :string
+    public function make_login_user(): \Illuminate\Http\RedirectResponse
     {
         $credentials = Request()->validate([
             'email' => ['required', 'email'],
@@ -42,7 +42,7 @@ class LoginController extends Controller
                     $info_provider = "GitHub Account.";
                     break;
             }
-            return redirect()->back()->withErrors(['This E-Mail is associated with an '.$info_provider]);
+            return redirect()->back()->withErrors([('This E-Mail is associated with an '.$info_provider)]);
         }
 
         if ( Auth::attempt($credentials, Request()->get('remember')) ) {
@@ -56,7 +56,7 @@ class LoginController extends Controller
     }
 
     //makes logout
-    public function make_logout_user() :string
+    public function make_logout_user() :\Illuminate\Http\RedirectResponse
     {
         Auth::logout();
         Request()->session()->invalidate();

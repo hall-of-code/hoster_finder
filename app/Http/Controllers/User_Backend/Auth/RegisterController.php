@@ -19,7 +19,7 @@ class RegisterController extends Controller
     }
 
     //makes the Register Process
-    public function make_register_user() :string
+    public function make_register_user()
     {
         Request()->validate([
             'username' => 'required|min:3',
@@ -119,7 +119,7 @@ class RegisterController extends Controller
 
 
     //basic funcitonality ------------------
-    public function login_after_register($auth_data)
+    public function login_after_register($auth_data): \Illuminate\Http\RedirectResponse
     {
         if ( Auth::attempt($auth_data, true))
         {
