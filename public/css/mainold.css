@@ -1,0 +1,147 @@
+:root
+{
+    --c_prim: #313455;
+    --c_dark: #282C47;
+    --c_middle: #2B2F4C;
+    --c_ultra: #25273E;
+    --c_lila: #7661C0;
+    --inv_red: rgba(219, 54, 86, 0.56);
+    --c_red: rgba(219, 54, 86, 1);
+    --c_light: #7d7fb1;
+}
+
+body
+{
+    background: var(--c_prim);
+}
+
+._login_box
+{
+    margin-top: 10rem;
+    border: 1px solid var(--c_ultra);
+    border-radius: 6px;
+    padding: 1rem;
+    background: var(--c_middle);
+}
+
+._logo_nav
+{
+    margin-top: 2.5rem;
+    margin-left: 1rem;
+    width: 17rem;
+    margin-bottom: 1.5rem;
+}
+
+._form_control_dark, ._form_control_dark:active, ._form_control_dark:focus, ._form_control_dark:hover
+{
+    background: var(--c_prim);
+    border: 2px solid var(--c_ultra);
+    color: var(--c_light);
+}
+
+._form_abstand
+{
+    margin-bottom: .8rem;
+}
+
+._alert_custom
+{
+    background: var(--inv_red);
+    border: 1px solid var(--c_red);
+}
+
+._text_light
+{
+    color: var(--c_light);
+}
+
+._text_dark
+{
+    color: var(--c_dark);
+}
+
+._text_black
+{
+    color: black;
+}
+
+._text_red
+{
+    color: var(--c_red);
+}
+
+._text_lila
+{
+    color: var(--c_lila);
+}
+
+._lila_button
+{
+    background: var(--c_lila);
+}
+._lila_button:hover
+{
+    opacity: 0.975;
+}
+
+._bg_dark
+{
+    background: var(--c_dark);
+}
+
+._bg_ultra
+{
+    background: var(--c_ultra);
+}
+
+._nav_bar
+{
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+
+
+.__mg_top_105rem
+{
+    margin-top: 1.5rem;
+}
+
+
+
+
+._btn_loader {
+    display: flex;
+    height: 16px;
+    width: 16px;
+    border: 2px rgba(0, 0, 0, 0.40) solid;
+    border-top: 2px black solid;
+    border-bottom: 2px black solid;
+    border-radius: 50%;
+}
+
+._btn_loader_father:active > ._btn_loader, ._btn_loader_father:focus > ._btn_loader {
+    display: flex;
+    height: 16px;
+    width: 16px;
+    border: 2px rgba(0, 0, 0, 0.40) solid;
+    border-top: 2px black solid;
+    border-bottom: 2px black solid;
+    border-radius: 50%;
+    -webkit-animation: spin1 0.7s infinite linear;
+    animation: spin1 0.7s infinite linear;
+}
+
+@-webkit-keyframes spin1 {
+    from {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+
+

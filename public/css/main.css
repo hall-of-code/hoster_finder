@@ -1,0 +1,286 @@
+:root
+{
+    --primary: #313455;
+    --secondary: #383B5D;
+    --tertar: #2B2F4C;
+    --tertdarker: #25273E;
+    --lila: rgb(118, 97, 192);
+    --lilaop: rgba(118, 97, 192, 60%);
+    --green: #42D4A0;
+    --light: #B2B6D4;
+    --discord: #3E4CE6;
+    --discordborder: rgba(62, 76, 230, 50%);
+    --telegram: #415166;
+    --telegramborder: rgba(65, 81, 102, 50%);
+    --twitter: #00A3E2;
+    --twitterborder: rgba(0, 163, 226, 50%);
+    --otherlight: #E3E3E3;
+    --red: #E44561;
+    --redop: rgba(228, 69, 97, 0.56);
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.logo
+{
+    width: 13rem;
+    margin-top: 4rem;
+    margin-left: 2rem;
+}
+
+.sidebar
+{
+    height: 100vh;
+}
+
+.nav_link
+{
+    transition: 0.07s all ease-in-out;
+}
+.nav_link:hover
+{
+    opacity: 78%;
+    color: var(--light);
+    transition: 0.1s all ease-in-out;
+}
+
+.nav_button
+{
+    padding: 0.1rem 1.7rem;
+    background: var(--lila);
+    color: var(--light);
+    border: 2px solid var(--lila);
+    transition: .3s all ease-in-out;
+    border-radius: 6px;
+}
+.nav_button:hover
+{
+    transition: .3s all ease-in-out;
+    background: transparent;
+    color: var(--light);
+}
+
+
+.bg_primary
+{
+    background: var(--primary);
+}
+.bg_secondary
+{
+    background: var(--secondary);
+}
+
+.bg_tertiar
+{
+    background: var(--tertar);
+}
+
+.text_light
+{
+    color: var(--light);
+}
+
+.register_box
+{
+    width: 100%;
+    box-shadow: 13px 14px 24px -1px rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    border: 1px solid var(--tertdarker);
+}
+
+.bg_image_register
+{
+    height: 100%;
+    border-radius: 6px 0 0 6px;
+}
+
+.register_input_box
+{
+    background: var(--primary);
+    border-radius: 9px;
+    height: 2.5rem;
+    border: 2px solid var(--secondary);
+    transition: 0.5s all ease-in-out;
+}
+
+.register_input
+{
+    background: var(--primary);
+    height: 2rem;
+    border: none;
+    color: var(--light);
+    transition: 0.4s all ease-in-out;
+}
+.register_input:hover, .register_input:active, .register_input:focus
+{
+    outline: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+.register_input_icon_box
+{
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
+.register_input_icon
+{
+    font-size: 1.3rem !important;
+    color: var(--light);
+    transition: 0.4s all ease-in-out;
+}
+
+.account_create_button
+{
+    background: var(--lila);
+    border: 2px solid var(--lila);
+    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
+    border-radius: 6px;
+    transition: 0.1s all ease-in-out;
+}
+.account_create_button:hover, .account_create_button:active, .account_create_button:focus
+{
+    background: var(--lilaop);
+    transition: 0.2s all ease-in-out;
+}
+
+.distanz_linie
+{
+    height: 2px;
+    width: 100%;
+    background: var(--light);
+}
+
+.login_provider_box
+{
+    background: var(--otherlight);
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    border-radius: 6px;
+    transition: 0.3s all ease-in-out;
+}
+.login_provider_box:hover
+{
+    opacity: 75%;
+    transition: 0.2s all ease-in-out;
+}
+
+.login_provider_icon
+{
+    height: 2.2rem;
+}
+
+.text_lila
+{
+    color: var(--lila);
+}
+
+.text_black
+{
+    color: black;
+}
+
+.alert_custom
+{
+    background: var(--redop);
+    border: 1px solid var(--red);
+}
+
+.text_red
+{
+    color: var(--red);
+}
+
+.text_red_hover:hover
+{
+    color: var(--red);
+    transition: .2s all ease-in-out;
+}
+
+.text_lila_hoover:hover
+{
+    color: var(--lilaop);
+    transition: .2s all ease-in-out;
+}
+
+.cursor_hand
+{
+    cursor: pointer;
+}
+
+.cursor_none
+{
+    cursor: none;
+}
+
+.cursor_pointer
+{
+    cursor: default;
+}
+
+.overflow_bar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.z-index-20
+{
+    z-index: 20;
+}
+
+.social_banner
+{
+    top: 80vh;
+    right: -8.9rem;
+}
+
+.social_banner_item
+{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 8px;
+}
+
+.social_banner_icon
+{
+    width: 1.7rem;
+    height: 1.7rem;
+}
+
+.bg_twitter
+{
+    background: var(--twitter);
+}
+
+.bg_discord
+{
+    background: var(--discord);
+}
+
+.bg_telegram
+{
+    background: var(--telegram);
+}
+
+.border_twitter
+{
+    border: 4px solid var(--twitterborder);
+    background-clip: padding-box;
+}
+
+.border_discord
+{
+    border: 4px solid var(--discordborder);
+    background-clip: padding-box;
+}
+
+.border_telegram
+{
+    border: 4px solid var(--telegramborder);
+    background-clip: padding-box;
+}
+
+.footer
+{
+    margin-top: 30vh !important;
+}
