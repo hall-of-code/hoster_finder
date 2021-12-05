@@ -72,49 +72,43 @@ class RegisterController extends Controller
         switch ($method)
         {
             case (1):
-                //google
-                $user_data = Socialite::driver('google')->user();
-                if(User::where('email', $user_data->getEmail())->count() > 0)
-                {
-                    return redirect()->route('user.register_page', ['locale' => \request()->route()->locale])->withErrors([__('Es existiert berreits ein Account mit dieser Email.')]);
-                }
-                else
-                {
-                    $new_user_data = (object) [];
-                    $new_user_data->username = $user_data->getNickname() ?? $user_data->getName();
-                    $new_user_data->role = 0;
-                    $new_user_data->email = $user_data->getEmail();
-                    $new_user_data->password = 'google';
-                    $new_user_data->method_typ = 1;
-                    $new_user_data->method_val = $user_data->getId();
-                    $new_user_data->avatar_url = $user_data->getAvatar();
-                    $this->create_new_user($new_user_data);
-                    return $this->login_after_register(['email' => $new_user_data->email, 'password' => $new_user_data->password]); //makes the login process
-                }
+                $case = 'google';
                 break;
             case (2):
-                //github
-                $user_data = Socialite::driver('github')->user();
-                if(User::where('email', $user_data->getEmail())->count() > 0)
-                {
-                    return redirect()->route('user.register_page', ['locale' => \request()->route()->locale])->withErrors([__('Es existiert berreits ein Account mit dieser Email.')]);
-                }
-                else
-                {
-                    $new_user_data = (object) [];
-                    $new_user_data->username = $user_data->getNickname();
-                    $new_user_data->role = 0;
-                    $new_user_data->email = $user_data->getEmail();
-                    $new_user_data->password = 'github';
-                    $new_user_data->method_typ = 2;
-                    $new_user_data->method_val = $user_data->getId();
-                    $new_user_data->avatar_url = $user_data->getAvatar();
-                    $this->create_new_user($new_user_data);
-                    return $this->login_after_register(['email' => $new_user_data->email, 'password' => $new_user_data->password]); //makes the login process
-                }
+                $case = 'github';
                 break;
+            default:
+                $case = 'google';
         }
-        return redirect()->back()->withErrors([ __('Ein unerwarteter Fehler ist aufgetreten.') ]);
+
+        $user_data = Socialite::driver($case)->user();
+        if($this->check_user_unique($user_data->getNickname()) == 1 or $this->check_user_unique($user_data->getEmail()) == 1)
+        {
+            return redirect()->back()->withErrors(['username' => 'Ein Account mit dem Benutzernamen oder der E-Mail Adresse exestiert berreits.']);
+        }
+        $new_user_data = (object) [];
+        $new_user_data->username = $user_data->getNickname() ?? $user_data->getName();
+        $new_user_data->role = 0;
+        $new_user_data->email = $user_data->getEmail();
+        $new_user_data->password = $case;
+        $new_user_data->method_typ = $method;
+        $new_user_data->method_val = hash::make($user_data->getId()); //user ID from Google/Github/ect is instead of password
+        $new_user_data->avatar_url = $user_data->getAvatar();
+        $this->create_new_user($new_user_data);
+        return $this->login_after_register(['email' => $new_user_data->email, 'password' => $new_user_data->password]); //makes the login process
+    }
+
+    //check if user with that credintials exists
+    public function check_user_unique($MailOrUsername)
+    {
+        if((User::where('email', $MailOrUsername)->count() > 0) or (User::where('username', $MailOrUsername)->count() > 0))
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 
 
