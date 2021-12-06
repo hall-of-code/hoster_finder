@@ -21,7 +21,20 @@ class LoginController extends Controller
         return view('User_Backend.Auth.login');
     }
 
-    //makes the login process
+    //login user into account simple variant
+    public function login_user($credentials, bool $remember = True): \Illuminate\Http\RedirectResponse
+    {
+        if ( Auth::attempt($credentials, $remember))
+        {
+            Request()->session()->regenerate();
+            return redirect()->route('user.dashboard', ['locale' => \request()->route()->locale]);
+        }
+        return redirect()->route('user.login_page', ['locale' => \request()->route()->locale])->withErrors([
+            'email' => __('Ups...wir konnten leider keinen Account mit diesen Login Daten finden.'),
+        ]);
+    }
+
+    //makes the login process for form posts
     public function make_login_user(): \Illuminate\Http\RedirectResponse
     {
         $credentials = Request()->validate([
@@ -29,30 +42,7 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        $get_user = User::where('email', $credentials['email'])->first();
-        if($get_user->method_typ > 0)
-        {
-            $info_provider = "other Authenticated Account.";
-            switch($get_user->method_typ)
-            {
-                case 1:
-                    $info_provider = "Google Account.";
-                    break;
-                case 2:
-                    $info_provider = "GitHub Account.";
-                    break;
-            }
-            return redirect()->back()->withErrors([('This E-Mail is associated with an '.$info_provider)]);
-        }
-
-        if ( Auth::attempt($credentials, Request()->get('remember')) ) {
-            Request()->session()->regenerate();
-            return redirect()->route('user.dashboard', ['locale' => \request()->route()->locale]);
-        }
-
-        return back()->withErrors([
-            'email' => 'Ups...wir konnten leider keinen Account mit diesen Login Daten finden.',
-        ]);
+        return $this->login_user($credentials, Request()->get('remember'));
     }
 
     //makes logout
