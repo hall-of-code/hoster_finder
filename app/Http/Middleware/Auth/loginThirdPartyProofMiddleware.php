@@ -15,6 +15,8 @@ class loginThirdPartyProofMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+
+    //validates if user is permittet to login or only can login via ThirdParty
     public function handle(Request $request, Closure $next)
     {
         Request()->validate([
