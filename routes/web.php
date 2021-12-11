@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\User_backend\Auth\AccountActivateAndResetController;
+use App\Http\Controllers\User_Backend\Auth\AccountActivateAndResetController;
 use App\Http\Controllers\User_Backend\Auth\LoginController;
 use App\Http\Controllers\User_Backend\Auth\RegisterController;
 use App\Http\Controllers\User_Backend\Auth\ThirdPartyController;
