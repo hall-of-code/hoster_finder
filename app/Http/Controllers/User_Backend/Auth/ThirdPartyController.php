@@ -56,9 +56,9 @@ class ThirdPartyController extends Controller
         $new_user_data->username = $extern_data->getNickname() ?? $extern_data->getName();
         $new_user_data->role = 0;
         $new_user_data->email = $extern_data->getEmail();
-        $new_user_data->password = $extern; //google/github/ect is the password for socialite authenticated users because they uses id for auth
+        $new_user_data->password = $extern_data->getId(); //google/github/ect is the password for socialite authenticated users because they uses id for auth
         $new_user_data->method_typ = $method_typ;
-        $new_user_data->method_val = $extern_data->getId(); //user ID from Google/Github/ect is instead of password
+        //$new_user_data->method_val = $extern_data->getId(); //user ID from Google/Github/ect is instead of password
         $new_user_data->avatar_url = $extern_data->getAvatar();
 
         if($registerHandler->check_if_user_already_exists($username, $email) == False)

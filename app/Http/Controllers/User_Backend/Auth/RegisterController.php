@@ -67,7 +67,7 @@ class RegisterController extends Controller
         $in->email      = $new_user_data->email;
         $in->password   = Hash::make($new_user_data->password);
         $in->method_typ = $new_user_data->method_typ ?? 0;
-        $in->method_val = (Hash::make($new_user_data->method_val ?? 0)) ?? 0;
+        //$in->method_val = (Hash::make($new_user_data->method_val ?? 0)) ?? 0;
         $in->avatar_url = $new_user_data->avatar_url ?? asset('/res/images/logo.png');
         $in->save();
         Mail::to($new_user_data->email)->send( new RegisterMail(["confirm_code" => "516785", "username" => $new_user_data->username]) );
