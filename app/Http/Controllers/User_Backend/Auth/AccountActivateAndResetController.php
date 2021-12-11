@@ -19,18 +19,22 @@ class AccountActivateAndResetController extends Controller
         $in->user_id = $user_id;
         $in->confirm_code = $verify_code;
         $in->save();
-        Mail::to($to)->send( new RegisterMail(["confirm_code" => $verify_code, "username" => $username]) );
+        Mail::to($to)->send( new RegisterMail(["confirm_code" => $verify_code, "username" => $username, 'uid' => $user_id]) );
     }
 
-    public function confirm_account_by_code($locale, $code = 0)
+    public function confirm_account_by_code($locale, $code = 0, $user_id = 0)
     {
-        if($code == 0)
+        if($code == 0 )
         {
             $code = Request()->get('confirm_code');
         }
-        if(accountverify::where('user_id', Auth()->id())->where('confirm_code', $code)->count() > 0)
+        if($user_id == 0)
         {
-            User::where('id', Auth()->id())->update(['acc_status' => 1]);
+            $user_id = Auth()->id();
+        }
+        if(accountverify::where('user_id', $user_id)->where('confirm_code', $code)->count() > 0)
+        {
+            User::where('id', $user_id)->update(['acc_status' => 1]);
             return redirect()->route('user.dashboard', app()->getLocale());
         }
         return Response('False'. Auth()->id());

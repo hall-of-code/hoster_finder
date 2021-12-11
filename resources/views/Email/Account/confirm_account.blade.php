@@ -7,6 +7,10 @@
     <p>
         {{ __("Hallo") }} {{ $username }}, <br>
             {{ __("Willkommen bei Hoster-Finder! Dein Bestätigungscode lautet: ") }} <b> {{ $confirm_code }} </b> <br>
+            {{ __("Oder klicke einfach bequem hier direkt auf den Link:") }}
+        <a href=" {{ Route('user.account.verify', ['locale' => app()->getLocale(), 'code' => $confirm_code, 'uid' => $uid]) }}">
+            {{ Route('user.account.verify', ['locale' => app()->getLocale(), 'code' => $confirm_code, 'uid' => $uid]) }}
+        </a> <br>
             {{ __("Viel Spaß!") }}
 </p>
 </body>

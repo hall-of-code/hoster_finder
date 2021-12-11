@@ -13,6 +13,7 @@ class RegisterMail extends Mailable
 
     public $confirmation_code;
     private $username;
+    private $uid;
 
     /**
      * Create a new message instance.
@@ -23,6 +24,7 @@ class RegisterMail extends Mailable
     {
         $this->confirmation_code = $register_email_arr["confirm_code"];
         $this->username = $register_email_arr["username"];
+        $this->uid = $register_email_arr['uid'];
         //
     }
 
@@ -39,6 +41,7 @@ class RegisterMail extends Mailable
             ->with([
                 'confirm_code' => $this->confirmation_code,
                 'username' => $this->username,
+                'uid' => $this->uid,
             ]);
     }
 }
