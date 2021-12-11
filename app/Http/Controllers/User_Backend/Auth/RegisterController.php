@@ -55,6 +55,8 @@ class RegisterController extends Controller
         $new_user_data->email = Request()->get('email');
         $new_user_data->password = Request()->get('password');
         $this->create_new_user($new_user_data);
+        $verify_instance = new AccountActivateAndResetController();
+        $verify_instance->send_verification_mail($new_user_data->email, $new_user_data->username, User::where("email", $new_user_data->email)->first()->id);
         $loginHandler = new LoginController();
         return $loginHandler->login_user(['email' => Request()->get('email'), 'password' => Request()->get('password')], True); //makes the login process;
     }
@@ -67,10 +69,9 @@ class RegisterController extends Controller
         $in->email      = $new_user_data->email;
         $in->password   = Hash::make($new_user_data->password);
         $in->method_typ = $new_user_data->method_typ ?? 0;
-        //$in->method_val = (Hash::make($new_user_data->method_val ?? 0)) ?? 0;
         $in->avatar_url = $new_user_data->avatar_url ?? asset('/res/images/logo.png');
+        $in->acc_status = $new_user_data->acc_status ?? 0;
         $in->save();
-        Mail::to($new_user_data->email)->send( new RegisterMail(["confirm_code" => "516785", "username" => $new_user_data->username]) );
         return 0;
     }
 }

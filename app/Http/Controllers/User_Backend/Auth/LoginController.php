@@ -41,7 +41,6 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-
         return $this->login_user($credentials, Request()->get('remember'));
     }
 
