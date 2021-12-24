@@ -12,10 +12,10 @@
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
-        "seanhayes-com/laravel-hcaptcha": "^1.2",
-      "ext-http": "*"
+        "seanhayes-com/laravel-hcaptcha": "^1.2"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.10",
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",

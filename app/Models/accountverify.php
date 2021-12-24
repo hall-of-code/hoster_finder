@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class accountverify extends Model
 {
     use HasFactory;
+
+    /**
+     * @var int|mixed
+     */
+    private $confirm_code;
+    /**
+     * @var mixed
+     */
+    private $user_id;
 }

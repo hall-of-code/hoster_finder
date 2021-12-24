@@ -27,7 +27,9 @@ Route::prefix('/{locale?}')->group(function () {
         Route::prefix('/u')->group(function () {
             Route::get('/register', [RegisterController::class, 'show_register_page'])->name('user.register_page');
             Route::post('/register/make', [RegisterController::class, 'registerNormalUser'])->name('user.register');
-            Route::get('/register/confirm/{code?}/{uid?}', [AccountActivateAndResetController::class, 'confirm_account_by_code'])->name('user.account.verify');
+            Route::get('/register/confirm/{code?}/{uid?}', [AccountActivateAndResetController::class, 'confirm_account_by_code'])->name('user.account.confirm');
+            Route::get('/register/show/confirm', [AccountActivateAndResetController::class, 'show_confirm_code_page'])->name('user.account.show_confirm_page');
+            Route::post('/register/confirm/{code?}/{uid?}', [AccountActivateAndResetController::class, 'confirm_account_by_code'])->name('user.account.confirm_post');
             Route::get('/thirdparty/redirect/{method}', [ThirdPartyController::class, 'thirdPartyRedirect'])->name('user.socialite.redirect');
             Route::get('/thirdparty/proceed/{method}', [ThirdPartyController::class, 'thirdPartyAuthProceed'])->name('user.socialite.proceed');
             Route::get('/login', [LoginController::class, 'show_login_page'])->name('user.login_page');
