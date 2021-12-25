@@ -35,7 +35,7 @@ class AccountActivateAndResetController extends Controller
     {
         if($code == 0 )
         {
-            $code = Request()->get('confirm_code');
+            $code = trim(Request()->get('confirm_code'));
         }
         if($user_id == 0)
         {

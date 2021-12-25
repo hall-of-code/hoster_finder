@@ -14,6 +14,8 @@ use Laravel\Socialite\Facades\Socialite;
 
 class RegisterController extends Controller
 {
+    //Todo https://codepen.io/waaark/pen/VbgwEM wegen 2FA
+
     //shows register page for /u/register
     public function show_register_page()
     {

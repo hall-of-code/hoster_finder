@@ -308,4 +308,9 @@
     background: var(--lila);
 }
 
+.margin_top_10rem
+{
+    margin-top: 10rem;
+}
+
 /*  Confirm_Page CSS: END */

@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         //meine custom middlewares
         'Auth.loginThirdPartyProofMiddleware' => \App\Http\Middleware\Auth\loginThirdPartyProofMiddleware::class,
+        'Auth.accountNotActivatedRedirect' => \App\Http\Middleware\Auth\accountNotActivatedRedirect::class,
     ];
 }
