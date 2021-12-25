@@ -283,7 +283,7 @@
 
 .footer
 {
-    margin-top: 100vh !important;
+    margin-top: 40vh !important;
 }
 
 /*  Confirm_Page CSS: Start */
@@ -300,7 +300,7 @@
 
 .box_shadow
 {
-    box-shadow: 12px 12px 20px -1px rgba(0, 0, 0, 0.25);
+    box-shadow: 8px 8px 18px -1px rgba(0, 0, 0, 0.2);
 }
 
 .bg_lila
@@ -313,4 +313,40 @@
     margin-top: 10rem;
 }
 
-/*  Confirm_Page CSS: END */
+@media only screen and (min-width: 960px) {
+    .margin_top_10rem_xl
+    {
+        margin-top: 10rem;
+    }
+}
+
+/*  Confirm_Page CSS: END | 2FA Page start */
+
+.telegram_button
+{
+    background: var(--telegram);
+    border: 2px solid var(--telegramborder);
+    padding: 0.7rem 1.5rem 0.7rem 1.5rem;
+    border-radius: 6px;
+    transition: 0.1s all ease-in-out;
+}
+.telegram_button:hover, .telegram_button:active, .telegram_button:focus
+{
+    background: var(--telegramborder);
+    transition: 0.2s all ease-in-out;
+}
+
+/*2FA page END |  */
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
