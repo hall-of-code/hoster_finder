@@ -32,7 +32,7 @@
             <div class="d-none d-xl-block col-xl-2"></div>
             <div class="d-none d-xl-flex col-xl-2 bg_lila left_roundet_box box_shadow mt-xl-4 mt-0">
                 <!-- Little lila block -->
-                .
+
             </div>
             <div class="col-12 col-xl-6 bg_tertiar right_roundet_box box_shadow pe-4 ps-5 mt-xl-4 mt-0">
                 <!-- text block -->

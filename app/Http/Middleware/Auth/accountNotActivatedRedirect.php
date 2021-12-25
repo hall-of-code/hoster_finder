@@ -19,6 +19,16 @@ class accountNotActivatedRedirect
 
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        switch (Auth()->user()->acc_status)
+        {
+            case 1:
+                return $next($request);
+                break;
+            case 2:
+                return back()->withErrors(''); //todo hier muss noch die middleware redirecten wenn man sein passwort zurückgesetzt hat.
+                break;
+            default:
+                return redirect()->route('user.account.show_confirm_page', App()->getLocale());
+        }
     }
 }

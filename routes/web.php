@@ -35,7 +35,7 @@ Route::prefix('/{locale?}')->group(function () {
             Route::get('/login', [LoginController::class, 'show_login_page'])->name('user.login_page');
             Route::post('/login/make', [LoginController::class, 'make_login_user'])->name('user.login')->middleware('Auth.loginThirdPartyProofMiddleware');
             Route::get('/logout', [LoginController::class, 'make_logout_user'])->name('user.logout');
-            Route::get('/dashboard', [DashboardController::class, 'show_dashboard_page'])->name('user.dashboard')->middleware(['auth']);
+            Route::get('/dashboard', [DashboardController::class, 'show_dashboard_page'])->name('user.dashboard')->middleware(['auth', 'Auth.accountNotActivatedRedirect']);
         });
     });
 });
