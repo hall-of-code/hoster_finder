@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\protection\Telegramchats;
 use App\Models\protection\Twofactorauths;
 use Carbon\Carbon;
+use hallofcode\discordLaravel\AppServiceProvider;
+use hallofcode\discordLaravel\DiscordLaravelServiceProvider;
 use Illuminate\Http\Request;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -49,7 +51,7 @@ class TwoFactorAuthenticationController extends Controller
                 $insert->save();
             }
         }
-        return "true";
+        return (new DiscordLaravelServiceProvider(app()))->boot();
     }
 
 }
