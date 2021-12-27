@@ -15,10 +15,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware(["auth:sanctum"])->group(function () {
-    Route::prefix('/v1')->group(function () {
+Route::prefix('/v1')->group(function () {
+    //[ api (sanctum) Protected Routes ]
+    Route::middleware(["auth:sanctum"])->group(function () {
         Route::prefix('/testing')->group(function () {
-            Route::get('/echo/{msg?}', function ($msg = "Hello, World!") { return $msg; });
+            Route::get('/echo/{msg?}', function ($msg = "Hello, World!") { return response()->json(['message' => $msg]); });
+        });
+    });
+
+    //[ api non-protected Routes / PUBLIC API ]
+    Route::middleware(["throttle:50,1"])->group(function () {
+        Route::prefix('/public')->group(function () {
+            Route::get('/echo/{msg?}', function ($msg = "Hello, World!") { return response()->json(['message' => $msg]); });
+            Route::post('/echo/{msg?}', function ($msg = "Hello, World! (This is a POST Route use 'message' to post an echo msg.") { return response()->json(['message' => (Request()->get('message') ?? $msg)]); });
         });
     });
 });

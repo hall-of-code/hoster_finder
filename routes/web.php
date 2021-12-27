@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API_Controlling\Access\accessController;
 use App\Http\Controllers\User_Backend\Auth\AccountActivateAndResetController;
 use App\Http\Controllers\User_Backend\Auth\LoginController;
 use App\Http\Controllers\User_Backend\Auth\RegisterController;
@@ -9,7 +10,6 @@ use App\Http\Controllers\User_Backend\Auth\TwoFactorAuthenticationController;
 use App\Http\Controllers\User_Backend\Main\DashboardController;
 use App\Http\Middleware\SetLocaleByUrlParam;
 use Illuminate\Support\Facades\Route;
-use Laravel\Passport\Passport;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +58,8 @@ Route::prefix('/{locale?}')->group(function () {
                 Route::get('/protect/2fa/test', [TwoFactorAuthenticationController::class, 'add_telegram'])->name('user.protection.send_2fa'); //sehr schlechte sache hier nix festes
                 Route::get('/logout', [LoginController::class, 'make_logout_user'])->name('user.logout');
                 Route::get('/dashboard', [DashboardController::class, 'show_dashboard_page'])->name('user.dashboard')->middleware(['Auth.accountNotActivatedRedirect']);
+
+                Route::get('/ctoken', [accessController::class, 'createTokenForUser']);
             });
         });
     });
