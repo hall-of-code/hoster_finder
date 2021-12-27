@@ -36,8 +36,6 @@ Route::prefix('/{locale?}')->group(function () {
             Route::get('/login', [LoginController::class, 'show_login_page'])->name('user.login_page');
             Route::post('/login/make', [LoginController::class, 'make_login_user'])->name('user.login')->middleware('Auth.loginThirdPartyProofMiddleware');
 
-            Route::get('/passport', function ($location) { return Passport::client(); });
-
             Route::middleware(['auth'])->group(function () {
                 Route::prefix('/settings')->group(function () {
                     Route::prefix('/security')->group(function () {

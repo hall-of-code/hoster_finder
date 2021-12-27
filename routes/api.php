@@ -15,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::prefix('/v1')->group(function () {
-    Route::prefix('/testing')->group(function () {
-        Route::get('/echo/{?msg}', function ($msg = "Hello, World!") { return $msg; });
+Route::middleware(["auth:sanctum"])->group(function () {
+    Route::prefix('/v1')->group(function () {
+        Route::prefix('/testing')->group(function () {
+            Route::get('/echo/{msg?}', function ($msg = "Hello, World!") { return $msg; });
+        });
     });
 });
 
-Route::fallback(function () {
+/*Route::fallback(function () {
     return response()->json(['error' => 'Not Found!'], 404);
-});
+});*/
