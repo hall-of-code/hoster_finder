@@ -59,7 +59,7 @@ Route::prefix('/{locale?}')->group(function () {
                 Route::get('/logout', [LoginController::class, 'make_logout_user'])->name('user.logout');
                 Route::get('/dashboard', [DashboardController::class, 'show_dashboard_page'])->name('user.dashboard')->middleware(['Auth.accountNotActivatedRedirect']);
 
-                Route::get('/ctoken', [accessController::class, 'createTokenForUser']);
+                Route::get('/userapi', [accessController::class, 'createTokenForUser']);
             });
         });
     });

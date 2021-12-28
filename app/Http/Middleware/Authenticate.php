@@ -17,5 +17,9 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             return route('user.login_page', app()->getLocale());
         }
+        else
+        {
+            return response()->json(['error' => 'User Authentication isnt defined.']);
+        }
     }
 }

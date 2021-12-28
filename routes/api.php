@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API_Controlling\Access\accessController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,9 +18,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(function () {
     //[ api (sanctum) Protected Routes ]
-    Route::middleware(["auth:sanctum"])->group(function () {
-        Route::prefix('/testing')->group(function () {
+    Route::middleware(["auth:sanctum", "auth:api"])->group(function () {
+        Route::prefix('/rest')->group(function () {
             Route::get('/echo/{msg?}', function ($msg = "Hello, World!") { return response()->json(['message' => $msg]); });
+        });
+    });
+
+    //[ api user-protected Routes / USER API ]
+    Route::middleware(["auth:web"])->group(function () {
+        Route::prefix('/user')->group(function () {
+            Route::get('/tokens', [accessController::class, 'getTokensFromUser']);
+            Route::post('/tokens', [accessController::class, 'createTokenForUser']);
+            Route::put('/tokens', [accessController::class, 'updateTokenByName']);
+            Route::delete('/tokens', [accessController::class, 'deleteTokenByName']);
         });
     });
 
