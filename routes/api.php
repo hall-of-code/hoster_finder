@@ -25,7 +25,7 @@ Route::prefix('/v1')->group(function () {
     });
 
     //[ api user-protected Routes / USER API ]
-    Route::middleware(["auth:web"])->group(function () {
+    Route::middleware(["Auth.additional"])->group(function () {
         Route::prefix('/user')->group(function () {
             Route::get('/tokens', [accessController::class, 'getTokensFromUser']);
             Route::post('/tokens', [accessController::class, 'createTokenForUser']);

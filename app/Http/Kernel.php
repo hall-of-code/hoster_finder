@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         //meine custom middlewares
         'Auth.loginThirdPartyProofMiddleware' => \App\Http\Middleware\Auth\loginThirdPartyProofMiddleware::class,
         'Auth.accountNotActivatedRedirect' => \App\Http\Middleware\Auth\accountNotActivatedRedirect::class,
+        'Auth.additional' => \App\Http\Middleware\Auth\additionalAuthCheck::class,
     ];
 }
