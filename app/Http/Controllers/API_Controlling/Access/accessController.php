@@ -22,7 +22,7 @@ class accessController extends Controller
     public function deleteTokenByName(): \Illuminate\Http\JsonResponse
     {
         $token_name = Request()->get('token_name');//if token name not provided
-        Auth(Request('__current_guard'))->user()->tokens()->where('name', $token_name)->first()->delete();
+        Auth(Request('__current_guard'))->user()->tokens()->where('name', $token_name)->delete();
         return response()->json(['token_name' => $token_name, 'deleted' => 'true']);
     }
 
