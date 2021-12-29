@@ -5,6 +5,7 @@ namespace App\Http\Middleware\Auth;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use mysql_xdevapi\Exception;
 
 class additionalAuthCheck
 {
@@ -27,13 +28,12 @@ class additionalAuthCheck
             auth()->shouldUse('web');
             return $next($request);
         }
-        if (! $request->expectsJson())
+        $x = true;
+        //try { $x = $request->expectsJson(); } catch (\ErrorException $e) { $x = false; };
+        if (! $x)
         {
             return route('user.login_page', app()->getLocale());
         }
-        else
-        {
-            return response()->json(['error' => 'User Authentication isnt defined.']);
-        }
+        return response()->json(['error' => 'User Authentication isnt defined.']);
     }
 }

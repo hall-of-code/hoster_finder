@@ -15,7 +15,8 @@
         "laravel/sanctum": "^2.13",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.5",
-        "seanhayes-com/laravel-hcaptcha": "^1.2"
+        "seanhayes-com/laravel-hcaptcha": "^1.2",
+      "ext-mysql_xdevapi": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
