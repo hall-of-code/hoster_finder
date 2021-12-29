@@ -15,14 +15,14 @@ class accessController extends Controller
     {
         $token_name = Request()->get('token_name') ?? false;
         if($token_name == false) $token_name = "TOKEN#" . str_replace([' ', '-', ':'],'', Carbon::now()); //if token name not provided
-        return response()->json(['token_name' => $token_name, 'api_token' => (Auth(Request('__current_guard'))->user()->createToken($token_name))->plainTextToken]);
+        return response()->json(['token_name' => $token_name, 'api_token' => (Auth()->user()->createToken($token_name))->plainTextToken]);
     }
 
     //[DELETE /tokens delete api token
     public function deleteTokenByName(): \Illuminate\Http\JsonResponse
     {
         $token_name = Request()->get('token_name');//if token name not provided
-        Auth(Request('__current_guard'))->user()->tokens()->where('name', $token_name)->delete();
+        Auth()->user()->tokens()->where('name', $token_name)->delete();
         return response()->json(['token_name' => $token_name, 'deleted' => 'true']);
     }
 
@@ -31,14 +31,14 @@ class accessController extends Controller
     {
         $token_name = Request()->get('token_name');//current token name
         $update_name = Request()->get('update_name');//new token name
-        Auth(Request('__current_guard'))->user()->tokens()->where('name', $token_name)->first()->update(['name' => $update_name]);
+        Auth()->user()->tokens()->where('name', $token_name)->first()->update(['name' => $update_name]);
         return response()->json(['token_name' => $update_name, 'updated' => 'true']);
     }
 
     //[GET /tokens update api token name
     public function getTokensFromUser(): \Illuminate\Http\JsonResponse
     {
-        $tokens_arr = Auth(Request('__current_guard'))->user()->tokens()->limit(100)->get(['name']);
+        $tokens_arr = Auth()->user()->tokens()->limit(100)->get(['name as token_name', 'last_used_at as last_used', 'created_at as created']);
         return response()->json(['tokens' => $tokens_arr, 'length' => sizeof($tokens_arr)]);
     }
 }

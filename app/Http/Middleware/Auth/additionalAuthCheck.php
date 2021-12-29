@@ -19,12 +19,12 @@ class additionalAuthCheck
     {
         if ( auth('sanctum')->check())
         {
-            $request['__current_guard'] = 'sanctum';
+            auth()->shouldUse('sanctum');
             return $next($request);
         }
         else if(auth()->check())
         {
-            $request['__current_guard'] = '';
+            auth()->shouldUse('web');
             return $next($request);
         }
         if (! $request->expectsJson())
