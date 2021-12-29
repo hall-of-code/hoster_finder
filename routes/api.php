@@ -18,19 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(function () {
     //[ api (sanctum) Protected Routes ]
-    Route::middleware(["auth:sanctum", "auth:api"])->group(function () {
-        Route::prefix('/rest')->group(function () {
+    Route::middleware(["auth:sanctum"])->group(function () {
+        Route::prefix('/work')->group(function () {
             Route::get('/echo/{msg?}', function ($msg = "Hello, World!") { return response()->json(['message' => $msg]); });
-        });
-    });
-
-    //[ api user-protected Routes / USER API ]
-    Route::middleware(["Auth.additional"])->group(function () {
-        Route::prefix('/user')->group(function () {
-            Route::get('/tokens', [accessController::class, 'getTokensFromUser']);
-            Route::post('/tokens', [accessController::class, 'createTokenForUser']);
-            Route::put('/tokens', [accessController::class, 'updateTokenByName']);
-            Route::delete('/tokens', [accessController::class, 'deleteTokenByName']);
         });
     });
 

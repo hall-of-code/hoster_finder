@@ -64,3 +64,13 @@ Route::prefix('/{locale?}')->group(function () {
         });
     });
 });
+
+//[ api user-protected Routes / USER API ]
+Route::middleware(["Auth.additional"])->group(function () {
+    Route::prefix('/api/v1/user')->group(function () {
+        Route::get('/tokens', [accessController::class, 'getTokensFromUser']);
+        Route::post('/tokens', [accessController::class, 'createTokenForUser']);
+        Route::put('/tokens', [accessController::class, 'updateTokenByName']);
+        Route::delete('/tokens', [accessController::class, 'deleteTokenByName']);
+    });
+});

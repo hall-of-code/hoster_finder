@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->routes(function () {
             Route::prefix('api')
-                ->middleware('web') //important
+                ->middleware('api') //changed back and moved both access routes into web.php
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
 
