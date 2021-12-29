@@ -14,8 +14,9 @@ class accessController extends Controller
     public function createTokenForUser(): \Illuminate\Http\JsonResponse
     {
         $token_name = Request()->get('token_name') ?? false;
+        $token_perms = Request()->get('token_perms') ?? ['*'];
         if($token_name == false) $token_name = "TOKEN#" . str_replace([' ', '-', ':'],'', Carbon::now()); //if token name not provided
-        return response()->json(['token_name' => $token_name, 'api_token' => (Auth()->user()->createToken($token_name))->plainTextToken]);
+        return response()->json(['token_name' => $token_name, 'api_token' => (Auth()->user()->createToken($token_name, $token_perms))->plainTextToken]);
     }
 
     //[DELETE /tokens delete api token
@@ -31,14 +32,15 @@ class accessController extends Controller
     {
         $token_name = Request()->get('token_name');//current token name
         $update_name = Request()->get('update_name');//new token name
-        Auth()->user()->tokens()->where('name', $token_name)->first()->update(['name' => $update_name]);
+        $token_perms = (Request()->get('token_perms')) ?? (Auth()->user()->tokens()->where('name', $token_name)->first())['abilities'];
+        Auth()->user()->tokens()->where('name', $token_name)->first()->update(['name' => $update_name, 'abilities' => $token_perms]);
         return response()->json(['token_name' => $update_name, 'updated' => 'true']);
     }
 
     //[GET /tokens update api token name
     public function getTokensFromUser(): \Illuminate\Http\JsonResponse
     {
-        $tokens_arr = Auth()->user()->tokens()->limit(100)->get(['name as token_name', 'last_used_at as last_used', 'created_at as created']);
+        $tokens_arr = Auth()->user()->tokens()->limit(100)->get(['name as token_name', 'last_used_at as last_used', 'created_at as created', 'abilities as token_perms']);
         return response()->json(['tokens' => $tokens_arr, 'length' => sizeof($tokens_arr)]);
     }
 }
