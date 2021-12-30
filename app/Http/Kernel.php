@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'Auth.loginThirdPartyProofMiddleware' => \App\Http\Middleware\Auth\loginThirdPartyProofMiddleware::class,
         'Auth.accountNotActivatedRedirect' => \App\Http\Middleware\Auth\accountNotActivatedRedirect::class,
         'Auth.additional' => \App\Http\Middleware\Auth\additionalAuthCheck::class,
+        'Auth.app_token' => \App\Http\Middleware\Auth\applicationTokenApiProof::class,
         'abilities' => \Laravel\Sanctum\Http\Middleware\CheckAbilities::class, //sanctum scopes
         'ability' => \Laravel\Sanctum\Http\Middleware\CheckForAnyAbility::class,
     ];

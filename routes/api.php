@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/v1')->group(function () {
     //[ api (sanctum) Protected Routes ]
-    Route::middleware(["auth:sanctum"])->group(function () {
+    Route::middleware(["auth:sanctum", "Auth.app_token"])->group(function () {
         Route::prefix('/work')->group(function () {
             Route::get('/echo/{msg?}', function ($msg = "Hello, World!") { return response()->json(['message' => $msg]); });
         });
