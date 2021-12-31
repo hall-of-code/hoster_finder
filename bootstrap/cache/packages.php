@@ -81,4 +81,15 @@
       0 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
     ),
   ),
+  'rakutentech/laravel-request-docs' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Rakutentech\\LaravelRequestDocs\\LaravelRequestDocsServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'LaravelRequestDocs' => 'Rakutentech\\LaravelRequestDocs\\LaravelRequestDocsFacade',
+    ),
+  ),
 );

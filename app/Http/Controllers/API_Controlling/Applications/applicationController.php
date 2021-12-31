@@ -25,8 +25,12 @@ class applicationController extends Controller
         {
             $query->where('app_name', $app_name);
         }
-        $applications = $query->limit($limit)->get();
-        return response()->json(['action' => 'list', 'result' => ($applications ?? []), 'error' => false]);
+        $applications = $query->limit($limit)->get(['id as app_id', 'app_name', 'app_icon', 'user_id', 'app_perms', 'app_status', 'created_at as creation_date']);
+        return response()->json([
+            'action' => 'list',
+            'result' => ($applications ?? []),
+            'error' => false
+        ]);
     }
 
     public function deleteApplication(): \Illuminate\Http\JsonResponse
@@ -44,9 +48,13 @@ class applicationController extends Controller
                 "error" => "missing app_id param",
             ]);
         }
-        $application = $query->first();
+        $application = $query->first()->get(['id as app_id', 'app_name', 'app_perms', 'user_id']);
         $query->delete();
-        return response()->json(["action" => "deleted application", 'error' => false, 'result' => $application]);
+        return response()->json([
+            "action" => "deleted application",
+            'error' => false,
+            'result' => $application
+        ]);
     }
 
     public function regenerateApplicationToken(): \Illuminate\Http\JsonResponse
@@ -66,15 +74,19 @@ class applicationController extends Controller
         }
         $app_token = base64_encode(openssl_random_pseudo_bytes(3 * (24 >> 2)));
         $app_token = $query->first()->update(['app_token' => $app_token])->get(["app_token"]);
-        return response()->json(["action" => "application token regenerated for application", "result" => $app_token, 'error' => false]);
+        return response()->json([
+            "action" => "application token regenerated for application",
+            "result" => ['app_token' => $app_token],
+            'error' => false,
+        ]);
     }
 
     public function updateApplication(): \Illuminate\Http\JsonResponse
     {
         $rdata = Request()->validate([
-            "app_name" => "max:128",
-            "app_perms" => "max:512",
-            "app_icon" => "max:256",
+            "app_name" => "max:128|nullable",
+            "app_perms" => "max:512|nullable",
+            "app_icon" => "max:256|nullable",
         ]);
         $user_id = Auth()->user()->id;
         $app_id = Request("app_id") ?? false;
@@ -91,11 +103,15 @@ class applicationController extends Controller
             ]);
         }
         $application = $query->first();
-        $updated_app = $application->update($rdata)->get();
+        $application->update($rdata);
+        $updated_app = $application->get(['id as app_id', 'app_name', 'app_perms', 'app_icon', 'user_id']);
 
         return response()->json([
             "action" => "update",
-            "updated" => $updated_app,
+            "result" => [
+                $updated_app,
+            ],
+            "error" => false,
         ]);
     }
 
@@ -106,7 +122,7 @@ class applicationController extends Controller
         ]);
         $app_name = Request('app_name');
         $user_id = Auth()->user()->id;
-        $app_perms = Request('app_perms');
+        $app_perms = Request('app_perms') ?? "FULL";
         $app_token = base64_encode(openssl_random_pseudo_bytes(3 * (24 >> 2)));
 
         if(applications::where('user_id', $user_id)->where('app_name', $app_name)->count() > 0)
@@ -133,11 +149,23 @@ class applicationController extends Controller
 
         return response()->json([
             "action" => "create",
-            "app_name" => "$app_name",
-            "app_perms" => "$app_perms",
-            "app_token" => "$app_token",
-            "app_icon" => "$app_icon",
-            "status" => "$app_status",
+            "result" => [
+                "app_name" => "$app_name",
+                "app_perms" => "$app_perms",
+                "app_token" => "$app_token",
+                "app_icon" => "$app_icon",
+                "status" => "$app_status",
+            ],
+            "error" => false,
+        ]);
+    }
+
+
+    public function getApplicationsLogs(): \Illuminate\Http\JsonResponse
+    {
+        return response()->json([
+            "error" => "true",
+            "result" => [],
         ]);
     }
 }
