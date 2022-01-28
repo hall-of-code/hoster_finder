@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API_Controlling\Access\accessController;
 use App\Http\Controllers\API_Controlling\Applications\applicationController;
+use App\Http\Controllers\User_Backend\Auth\Telegram\TelegramController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,19 @@ Route::middleware(["auth:sanctum"])->group(function () {
                         Route::put   ('/applications/regenerate', [applicationController::class, 'regenerateApplicationToken'])->name('api.v1.user.applications.regenerate');
 
                         Route::get   ('/applications/logs', [applicationController::class, 'getApplicationsLogs'])->name('api.v1.user.applications.logs');
+
+                        Route::prefix('/security')->group(function () {
+                            Route::prefix('/2fa')->group(function () {
+                                Route::prefix('/methods')->group(function () {
+                                    Route::prefix('/telegram')->group(function () {
+                                        Route::get('/reload', [TelegramController::class, 'return_telegram_chatid'])->name('user.settings.security.2fa.telegram.reload');
+                                        Route::get('/link={?chatid}', [TelegramController::class, 'link_telegram_to_user'])->name('user.settings.security.2fa.telegram.link');
+                                        Route::get('/remove={?chatid}', [TelegramController::class, 'link_telegram_to_user'])->name('user.settings.security.2fa.telegram.remove');
+                                        Route::get('/update={?newchatid}', [TelegramController::class, 'link_telegram_to_user'])->name('user.settings.security.2fa.telegram.update');
+                                    });
+                                });
+                            });
+                        });
                     });
                 });
             });

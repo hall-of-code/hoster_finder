@@ -28,7 +28,7 @@
                                 <i id="register_form_email_icon" class="material-icons register_input_icon ms-2">https</i>
                             </div>
                             @csrf
-                            <input type="number" name="tan_code" oninput="check_tan_code()" id="tan_code_input" value="" placeholder="{{ __('4-stelliger Bestätigungscode') }}" class="register_input">
+                            <input type="number" maxlength="4" minlength="4" name="tan_code" oninput="check_tan_code()" id="tan_code_input" value="" placeholder="{{ __('4-stelliger Bestätigungscode') }}" class="register_input">
                         </div>
 
                         <button type="submit" class="telegram_button w-100 m-3 mb-xl-5 mb-0 text-light">
